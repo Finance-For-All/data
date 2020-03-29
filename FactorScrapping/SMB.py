@@ -13,9 +13,16 @@ def SMB(frequency='weekly', start_date='19260701', end_date=None):
 
     if not end_date:
         end_date = datetime.now().strftime('%Y%m%d')
+    else:
+        try:
+            datetime.strptime(end_date, "%Y%m%d")
+        except:
+            raise ValueError('Invalid format for start_date')
+        else:
+            end_date = datetime.strptime(end_date, "%Y%m%d")
 
     try:
-        datetime.strptime(start_date, '%Y%m%d')
+        start_date = datetime.strptime(start_date, '%Y%m%d')
     except:
         raise ValueError('Invalid format for start_date')
 
